@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+              		    http://www.springframework.org/schema/mvc   http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+        				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd ">
+    
+    <!-- 配置包扫描器 -->    
+    <context:component-scan base-package="com.pele.controller"></context:component-scan>
+    <!-- 配置注解驱动 -->
+    <mvc:annotation-driven/>
+    <!-- 静态资源映射 -->
+	<!--
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"></mvc:resources>-->
+    <!-- 视图解析器 -->
+	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/views"/>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">utf-8</prop>
+				<prop key="output.encoding">utf-8</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+				<prop key="file.resource.loader.modificationCheckInterval">1</prop>
+				<prop key="velocimacro.library.autoreload">false</prop>
+			</props>
+		</property>
+	</bean>
+    <bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="suffix" value=".vm" />
+		<property name="contentType" value="text/html;charset=utf-8"/>
+		<property name="dateToolAttribute" value="date"/>
+  	</bean>
+	<!-- 配置图片解析器，实现图片上传 -->
+	<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">	
+		<!-- 设置文件上传的最大大小 5MB-->
+		<property name="maxUploadSize">
+			<value>5242880</value>
+		</property>
+	</bean>
+</beans>        
