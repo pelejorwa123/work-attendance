@@ -12,6 +12,9 @@
     <context:component-scan base-package="com.pele.controller"></context:component-scan>
     <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
+
+	<!-- 静态资源映射 第一种方式-->
+	<mvc:default-servlet-handler/>
     <!-- 静态资源映射 -->
 	<!--
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"></mvc:resources>
