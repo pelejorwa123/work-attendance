@@ -11,8 +11,6 @@ $( document ).ready(function() {
     // testLocalStorageData();
     // Load profile if it exits
     loadProfile();
-    $('#inputUsername').innerHTML="";
-    $('#inputPassword').innerHTML="";
 });
 
 /**
