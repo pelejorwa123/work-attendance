@@ -27,7 +27,6 @@ public class LoginController {
     @ResponseBody
     public String checkLoginInfo(@RequestBody User user,HttpServletRequest request){
        Boolean isCheckedRight= loginService.checkLoginInfo(user,request);
-
        if (isCheckedRight){
            return "ok";
        }

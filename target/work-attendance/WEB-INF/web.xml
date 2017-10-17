@@ -3,7 +3,17 @@
          xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="taotao" version="2.5">
-  <display-name>taotao-manager</display-name>
+  <display-name>work-attendance</display-name>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/500.html</location>
+  </error-page>
 
   <!-- 初始化spring容器 -->
   <context-param>
@@ -31,4 +41,5 @@
     <!-- 由SpringMVC拦截所有请求 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
 </web-app>

@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-    @RequestMapping("index")
+    @RequestMapping("home")
     public String showIndex(){
-        return  "index";
+        return "/home";
+    }
+
+    @RequestMapping("attend")
+    public String showAttend(){
+        return  "attend";
     }
 
 }

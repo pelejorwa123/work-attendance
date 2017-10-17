@@ -27,6 +27,9 @@
 			<mvc:exclude-mapping path="/js/**"/>
 			<mvc:exclude-mapping path="/css/**"/>
 			<mvc:exclude-mapping path="/images/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/*.html"/>
+			<mvc:exclude-mapping path="/attend/sign"/>
 			<bean class="com.pele.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -41,6 +44,9 @@
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
     <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources mapping="/images/**" location="/images/"></mvc:resources>
+	<mvc:resources mapping="/fonts/**" location="/fonts/"></mvc:resources>
+	<mvc:resources mapping="/*.html" location="/"></mvc:resources>
+	<mvc:resources mapping="/static/**" location="/static/"/>
 
     <!-- 视图解析器-->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
