@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("login")
@@ -35,4 +36,9 @@ public class LoginController {
        }
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpSession httpSession){
+        loginService.logout(httpSession);
+        return "redirect:/login/index";
+    }
 }

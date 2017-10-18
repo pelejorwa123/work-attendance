@@ -264,4 +264,31 @@
     where user_id = #{userId,jdbcType=INTEGER}
     AND attend_date = #{attendDate,jdbcType=DATE}
   </select>
+
+  <select id="countAttendByPageParam" parameterType="com.pele.common.pojo.PageParam" resultType="int">
+    select COUNT(*)
+    from attend
+    where user_id = #{userId,jdbcType=INTEGER}
+    <if test="startDate!=null and endDate!=null">
+      AND attend_date BETWEEN #{startDate} AND #{endDate}
+    </if>
+    <if test="attendStatus!=null">
+      AND attend_status=#{attendStatus}
+    </if>
+  </select>
+
+  <select id="selectAttendByPageParam" parameterType="com.pele.common.pojo.PageParam" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attend
+    where user_id = #{userId,jdbcType=INTEGER}
+    <if test="startDate!=null and endDate!=null">
+      AND attend_date BETWEEN #{startDate} AND #{endDate}
+    </if>
+    <if test="attendStatus!=null">
+      AND attend_status=#{attendStatus}
+    </if>
+      LIMIT #{startRows},#{pageSize}
+  </select>
+
 </mapper>

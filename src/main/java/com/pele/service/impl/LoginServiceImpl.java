@@ -43,4 +43,9 @@ public class LoginServiceImpl implements LoginService {
         }
         return false;
     }
+
+    @Override
+    public void logout(HttpSession httpSession) {
+        httpSession.removeAttribute("UserInfo");
+    }
 }

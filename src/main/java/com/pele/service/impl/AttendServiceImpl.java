@@ -1,5 +1,7 @@
 package com.pele.service.impl;
 
+import com.pele.common.pojo.PageParam;
+import com.pele.common.pojo.PageResult;
 import com.pele.common.utils.DateUtils;
 import com.pele.mapper.AttendMapper;
 import com.pele.pojo.Attend;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -75,5 +78,29 @@ public class AttendServiceImpl implements AttendService{
                 attendMapper.updateByPrimaryKey(attend);
             }
         }
+    }
+    /**
+     *@author: pele
+     *@time: 2017/10/18 21:54
+     *@package: com.pele.service.impl
+     *@descroption:根据分页参数以及筛选条件查询打卡记录
+     */
+    @Override
+    public PageResult getAttendListByPageParam(PageParam pageParam) {
+        PageResult pageResult = new PageResult();
+        //设置pageParam的起始日期和结束日期
+        String dates[] = pageParam.getRangeDate().split("/");
+        pageParam.setStartDate(dates[0]);
+        pageParam.setEndDate(dates[1]);
+       int count = attendMapper.countAttendByPageParam(pageParam);
+       if(count>0){
+           List<Attend> resultList = attendMapper.selectAttendByPageParam(pageParam);
+           pageResult.setTotalRows(count);
+           pageResult.setItems(resultList);
+       }
+       pageResult.setCurrentPage(pageParam.getCurrentPage());
+       pageResult.setPageSize(pageParam.getPageSize());
+       pageResult.setStartRows(pageParam.getStartRows());
+        return pageResult;
     }
 }
