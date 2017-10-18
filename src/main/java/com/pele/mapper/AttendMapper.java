@@ -28,4 +28,6 @@ public interface AttendMapper {
     int updateByPrimaryKeySelective(Attend record);
 
     int updateByPrimaryKey(Attend record);
+
+    Attend selectByUserIdAndDate(Attend attend);
 }

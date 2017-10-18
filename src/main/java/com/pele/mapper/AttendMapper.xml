@@ -255,4 +255,13 @@
       attend_status = #{attendStatus,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自己写的sql语句-->
+  <select id="selectByUserIdAndDate" parameterType="com.pele.pojo.Attend" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attend
+    where user_id = #{userId,jdbcType=INTEGER}
+    AND attend_date = #{attendDate,jdbcType=DATE}
+  </select>
 </mapper>
