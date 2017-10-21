@@ -72,6 +72,9 @@
   <sql id="Base_Column_List">
     id, user_id, attend_date, attend_week, attend_morning, attend_evening, absence, attend_status
   </sql>
+  <sql id="User_Base_Column_List">
+    id, username, password, mobile, real_name, head_image
+  </sql>
   <select id="selectByExample" parameterType="com.pele.pojo.AttendExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -289,6 +292,36 @@
       AND attend_status=#{attendStatus}
     </if>
       LIMIT #{startRows},#{pageSize}
+  </select>
+
+  <!--根据给定的日期找出没有打卡记录的所有用户-->
+  <select id="selectUnattendedUsers" parameterType="java.util.Date" resultType="com.pele.pojo.User">
+    SELECT DISTINCT
+    <include refid="User_Base_Column_List"/>
+    FROM user
+    WHERE
+    user.id NOT IN (
+    SELECT user_id from attend
+    WHERE attend_date=#{date,jdbcType=DATE} )
+  </select>
+
+  <!--根据给定的日期找出异常的打卡记录-->
+  <select id="selectAbnormalAttendList" parameterType="java.util.Date" resultType="com.pele.pojo.Attend">
+    SELECT DISTINCT
+    <include refid="Base_Column_List"/>
+    FROM attend
+    WHERE
+    attend_date=#{date,jdbcType=DATE}
+    AND (attend.attend_morning IS NULL OR attend.attend_evening IS NULL)
+  </select>
+
+  <!--根据给定的日期找出全部打卡记录-->
+  <select id="selectAllAttendByDate" parameterType="java.util.Date" resultMap="BaseResultMap">
+    SELECT DISTINCT
+    <include refid="Base_Column_List"/>
+    FROM attend
+    WHERE
+    attend_date=#{date,jdbcType=DATE}
   </select>
 
 </mapper>

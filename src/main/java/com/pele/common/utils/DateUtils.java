@@ -30,6 +30,23 @@ public class DateUtils {
 
     /**
      *@author: pele
+     *@time: 2017/10/18 12:58
+     *@package: com.pele.common.utils
+     *@descroption:得到给定时间的星期几
+     */
+    public static int getWeekday(Date date){
+        Calendar calendar =Calendar.getInstance();
+        calendar.setTime(date);
+        //换算成中国的表示习惯
+        int weekday=calendar.get(Calendar.DAY_OF_WEEK)-1;
+        if (weekday==0){
+            weekday=7;
+        }
+        return weekday;
+    }
+
+    /**
+     *@author: pele
      *@time: 2017/10/18 13:29
      *@package: com.pele.common.utils
      *@descroption:根据给定的Hour和Minute生成一个Date

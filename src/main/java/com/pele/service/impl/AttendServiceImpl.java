@@ -5,6 +5,8 @@ import com.pele.common.pojo.PageResult;
 import com.pele.common.utils.DateUtils;
 import com.pele.mapper.AttendMapper;
 import com.pele.pojo.Attend;
+import com.pele.pojo.AttendExample;
+import com.pele.pojo.User;
 import com.pele.service.AttendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -102,5 +104,33 @@ public class AttendServiceImpl implements AttendService{
        pageResult.setPageSize(pageParam.getPageSize());
        pageResult.setStartRows(pageParam.getStartRows());
         return pageResult;
+    }
+
+    @Override
+    public List<User> getUnCheckedUserList(Date date) {
+        List<User> userList = attendMapper.selectUnattendedUsers(date);
+        return userList;
+    }
+
+    @Override
+    public void attendBySystem(Attend attend) {
+        attendMapper.insertSelective(attend);
+    }
+
+    @Override
+    public List<Attend> findAbnormalAttendList(Date date) {
+       List<Attend> abNormalAttendList = attendMapper.selectAbnormalAttendList(date);
+       return  abNormalAttendList;
+    }
+
+    @Override
+    public void updateAttend(Attend attend) {
+        attendMapper.updateByPrimaryKeySelective(attend);
+    }
+
+    @Override
+    public List<Attend> getAllAttendByDate(Date date) {
+        List<Attend> attendList = attendMapper.selectAllAttendByDate(date);
+        return  attendList;
     }
 }
