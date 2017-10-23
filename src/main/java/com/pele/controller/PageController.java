@@ -16,4 +16,9 @@ public class PageController {
         return  "attend";
     }
 
+    @RequestMapping("register")
+    public String showRegister(){
+        return "register";
+    }
+
 }

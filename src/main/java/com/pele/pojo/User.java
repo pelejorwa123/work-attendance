@@ -13,6 +13,10 @@ public class User {
 
     private String headImage;
 
+    private Byte sex;
+
+    private String email;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +63,21 @@ public class User {
 
     public void setHeadImage(String headImage) {
         this.headImage = headImage == null ? null : headImage.trim();
+    }
+
+    public Byte getSex() {
+        return sex;
+    }
+
+    public void setSex(Byte sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

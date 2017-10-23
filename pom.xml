@@ -160,6 +160,14 @@
         <version>${servlet-api.version}</version>
         <scope>provided</scope>
       </dependency>
+
+      <!--发邮件jar包-->
+      <dependency>
+        <groupId>javax.mail</groupId>
+        <artifactId>mail</artifactId>
+        <version>1.4.7</version>
+      </dependency>
+
       <!-- Redis客户端 -->
       <dependency>
         <groupId>redis.clients</groupId>

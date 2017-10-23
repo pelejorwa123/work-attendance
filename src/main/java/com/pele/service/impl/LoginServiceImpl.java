@@ -22,11 +22,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Boolean checkLoginInfo(User user, HttpServletRequest request) {
-        String username=user.getUsername();
+        String email=user.getEmail();
         String password=user.getPassword();
         UserExample userExample=new UserExample();
         UserExample.Criteria criteria=userExample.createCriteria();
-        criteria.andUsernameEqualTo(username);
+        criteria.andEmailEqualTo(email);
         List<User> userResult=userMapper.selectByExample(userExample);
         //如果找到存在这个用户名的用户
         if (userResult!=null&&userResult.size()>0){

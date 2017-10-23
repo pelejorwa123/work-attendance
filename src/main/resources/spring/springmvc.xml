@@ -30,6 +30,9 @@
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/*.html"/>
 			<mvc:exclude-mapping path="/attend/sign"/>
+			<!--注册链接不要拦截-->
+			<mvc:exclude-mapping path="/register"/>
+			<mvc:exclude-mapping path="/user/register"/>
 			<bean class="com.pele.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -57,7 +60,7 @@
 				<prop key="output.encoding">utf-8</prop>
 				<prop key="file.resource.loader.cache">false</prop>
 				<prop key="file.resource.loader.modificationCheckInterval">1</prop>
-				<prop key="velocimacro.library.autoreload">false</prop>
+				<prop key="velocimacro.library.autoreload">true</prop>
 			</props>
 		</property>
 	</bean>

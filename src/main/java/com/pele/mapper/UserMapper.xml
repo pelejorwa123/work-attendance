@@ -8,6 +8,8 @@
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="head_image" jdbcType="VARCHAR" property="headImage" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, mobile, real_name, head_image
+    id, username, password, mobile, real_name, head_image, sex, email
   </sql>
   <select id="selectByExample" parameterType="com.pele.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -102,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.pele.pojo.User">
     insert into user (id, username, password, 
-      mobile, real_name, head_image
-      )
+      mobile, real_name, head_image, 
+      sex, email)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}
-      )
+      #{mobile,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pele.pojo.User">
     insert into user
@@ -129,6 +131,12 @@
       <if test="headImage != null">
         head_image,
       </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,6 +156,12 @@
       </if>
       <if test="headImage != null">
         #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +192,12 @@
       <if test="record.headImage != null">
         head_image = #{record.headImage,jdbcType=VARCHAR},
       </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +210,9 @@
       password = #{record.password,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       real_name = #{record.realName,jdbcType=VARCHAR},
-      head_image = #{record.headImage,jdbcType=VARCHAR}
+      head_image = #{record.headImage,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=TINYINT},
+      email = #{record.email,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +235,12 @@
       <if test="headImage != null">
         head_image = #{headImage,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -222,7 +250,17 @@
       password = #{password,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
-      head_image = #{headImage,jdbcType=VARCHAR}
+      head_image = #{headImage,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--自己编写的sql-->
+  <select id="selectUserByEmail" parameterType="java.lang.String" resultType="com.pele.pojo.User">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM user
+    WHERE email=#{email}
+  </select>
 </mapper>

@@ -73,7 +73,7 @@
     id, user_id, attend_date, attend_week, attend_morning, attend_evening, absence, attend_status
   </sql>
   <sql id="User_Base_Column_List">
-    id, username, password, mobile, real_name, head_image
+    id, username, password, mobile, real_name, head_image, sex, email
   </sql>
   <select id="selectByExample" parameterType="com.pele.pojo.AttendExample" resultMap="BaseResultMap">
     select

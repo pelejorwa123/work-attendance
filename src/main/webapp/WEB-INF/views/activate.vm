@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>306员工考勤系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom styles for this template -->
+    <link href="/css/login_page.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/login_page.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="/images/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <a href="/login/index" class="forgot-password">
+                去登陆
+            </a>
+        </div>
+    </div>
+</body>

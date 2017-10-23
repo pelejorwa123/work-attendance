@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>306员工考勤系统</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Custom styles for this template -->
+        <link href="/css/login_page.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
+        <script src="/js/sweetalert.min.js"></script>
+        <script src="/js/jquery.js"></script>
+      #*  <script src="/js/login_page.js"></script>*#
+    </head>
+<body>
+<div class="container">
+    <div class="card card-container">
+        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+        <img id="profile-img" class="profile-img-card" src="/images/avatar_2x.png">
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" id="login_form" action="/index">
+            <div>
+                <span>用户名:</span><input id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="" type="username">
+                <span id="user_alert" style="color: red;visibility: hidden">用户名不能为空</span>
+            </div>
+            <div>
+                <span>真实姓名:</span><input id="inputRealname" class="form-control" placeholder="Realname" required="" type="username">
+                <span id="realname_alert" style="color: red;visibility: hidden">真实姓名不能为空</span>
+            </div>
+            <div>
+                <span>密码:</span><input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
+                <span id="password_alert" style="color: red;visibility: hidden">密码不能为空</span>
+            </div>
+            <div>
+                <span>邮箱:</span><input id="inputEmail" class="form-control" placeholder="Email" required="" type="username">
+                <span id="email_alert" style="color: red;visibility: hidden">邮箱不能为空</span>
+            </div>
+            <div>
+                <span>性别:</span>
+                <input type=radio name="sex" value="0" checked>男
+                <input type=radio name="sex" value="1">女
+            </div>
+            <br/>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" id="register_button">注册</button>
+        </form><!-- /form -->
+    </div>
+</div>
+<script>
+    $('#register_button').on('click',function(){
+        $('#user_alert').css('visibility','hidden');
+        $('#realname_alert').css('visibility','hidden');
+        $('#password_alert').css('visibility','hidden');
+        $('#password_alert').text("密码不能为空");
+        var username=$('#inputUsername').val();
+        var realname=$('#inputRealname').val();
+        var password=$('#inputPassword').val();
+        var email=$('#inputEmail').val();
+        var sex=$('input[name="sex"]:checked').val();
+        if(username==null||username.length==0){
+            $('#user_alert').css('visibility','visible');
+            return;
+        }
+        if(realname==null||realname.length==0){
+            $('#realname_alert').css('visibility','visible');
+            return;
+        }
+        if(password==null||password.length==0){
+            $('#password_alert').css('visibility','visible');
+            return;
+        }
+        if(email==null||email.length==0){
+            $('#email_alert').css('visibility','visible');
+            return;
+        }
+        function GetJsonData() {
+            var json = {
+                username:username,
+                realName:realname,
+                password:password,
+                email:email,
+                sex:sex
+            };
+            return json;
+        };
+        //如果成功发出ajax提交登录信息
+        $.ajax({
+            url:"/user/register",
+            type:"post",
+            type:"json",
+            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify(GetJsonData()),
+            success:function(data){
+                if (data.status!=200) {
+                    $('#email_alert').text(data.data);
+                    $('#email_alert').css('visibility', 'visible');
+                }else {
+                    swal({
+                        title:"注册成功!",
+                        text:"您现在可以去登录!",
+                        type:"success"
+                    },
+                    function(){
+                        window.location.href="/login/index";
+                    });
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>
