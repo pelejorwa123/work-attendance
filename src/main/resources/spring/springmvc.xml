@@ -33,6 +33,7 @@
 			<!--注册链接不要拦截-->
 			<mvc:exclude-mapping path="/register"/>
 			<mvc:exclude-mapping path="/user/register"/>
+			<mvc:exclude-mapping path="/user/activate"/>
 			<bean class="com.pele.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

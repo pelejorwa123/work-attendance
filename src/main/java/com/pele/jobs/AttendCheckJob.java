@@ -6,8 +6,12 @@ import com.pele.pojo.Attend;
 import com.pele.pojo.User;
 import com.pele.service.AttendService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +34,11 @@ public class AttendCheckJob {
 
     @Autowired
     AttendService attendService;
+
+    @Autowired
+    JavaMailSender mailSender;
+
+
     /**
      *@author: pele
      *@time: 2017/10/19 21:05
@@ -69,7 +78,7 @@ public class AttendCheckJob {
         List<User> userList = findUnattendedUsers(date);
         //循环遍历这个list，插入数据库，并给用户发一封邮件
         for(User user : userList){
-            sendMessage();
+            sendMessage(user,date);
             Attend attend = new Attend();
             attend.setUserId(user.getId());
             attend.setAttendDate(date);
@@ -92,9 +101,39 @@ public class AttendCheckJob {
         List<User> userList = attendService.getUnCheckedUserList(date);
         return userList;
     }
+
     private List<Attend> findAbnormalAttendList(Date date){
         List<Attend> abNormalAttendList = attendService.findAbnormalAttendList(date);
         return  abNormalAttendList;
     }
-    private void sendMessage(){}
+
+
+    /**
+     *@author: pele
+     *@time: 2017/11/7 15:29
+     *@package: com.pele.jobs
+     *@descroption:给当天打卡状态不正常的员工发送邮件
+     */
+    private void sendMessage(User user,Date date){
+        String username = user.getUsername();
+        String email = user.getEmail();
+        String subject = "考勤异常通知";
+        String content = "<div>" +
+                            "<p>xx,你在xxx打卡记录异常,请登录系统后查看</p>" +
+                            "<a href=\"http://localhost:8080/login/index\">去登陆</a>" +
+                         "</div>";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            InternetAddress fromAddress = new InternetAddress("1461775766@qq.com");
+            InternetAddress toAddress = new InternetAddress(email);
+            message.setSubject(subject);
+            message.setFrom(fromAddress);
+            message.addRecipient(MimeMessage.RecipientType.TO,toAddress);
+            message.setContent(content,"text/html;charset=utf-8");
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 }

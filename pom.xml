@@ -8,7 +8,7 @@
   <name>work-attendance</name>
   <!-- 集中定义依赖版本号 -->
   <properties>
-      <junit.version>4.12</junit.version>
+      <junit.version>4.8.2</junit.version>
       <spring.version>4.3.10.RELEASE</spring.version>
       <mybatis.version>3.2.7</mybatis.version>
       <mybatis.spring.version>1.2.2</mybatis.spring.version>
@@ -25,7 +25,7 @@
       <pagehelper.version>3.5.1</pagehelper.version>
       <jedis.version>2.9.0</jedis.version>
       <quartz.version>2.2.2</quartz.version>
-      <shiro.version>1.2.2</shiro.version>
+      <shiro.version>1.4.0</shiro.version>
   </properties>
     <dependencies>
       <dependency>
@@ -85,6 +85,12 @@
             <artifactId>shiro-core</artifactId>
             <version>${shiro.version}</version>
         </dependency>
+      <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.3</version>
+      </dependency>
       <!-- Mybatis -->
       <dependency>
         <groupId>org.mybatis</groupId>

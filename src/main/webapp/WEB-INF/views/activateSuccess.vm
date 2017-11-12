@@ -13,28 +13,8 @@
 <body>
     <div class="container">
         <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="/images/avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form class="form-signin" id="login_form" action="/index">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="username" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
-                <span id="user_alert"style="color: red;visibility: hidden">邮箱不能为空</span>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <span id="password_alert" style="color: red;visibility: hidden">密码不能为空</span>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> 记住密码
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" id="login_button">登录</button>
-            </form><!-- /form -->
-            <a href="#" class="forgot-password">
-                忘记密码?
-            </a>
-            <a href="/register" class="forgot-password" style="float:right">
-                注册用户
-            </a>
+           <h3>激活成功！</h3>
+            <a href="/login/index">去登录</a>
         </div>
     </div>
     <script>
@@ -70,7 +50,6 @@
             })
             function GetJsonData() {
                 var json = {
-                    email:email,
                     password:password
                 };
                 return json;

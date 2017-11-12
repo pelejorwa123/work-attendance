@@ -96,7 +96,7 @@
                 }else {
                     swal({
                         title:"注册成功!",
-                        text:"您现在可以去登录!",
+                        text:"请邮箱激活后登录!",
                         type:"success"
                     },
                     function(){
